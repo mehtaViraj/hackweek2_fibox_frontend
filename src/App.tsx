@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { HomePage } from './pages/home';
 import { LoginPage } from './pages/login';
-import { NewPlaidItemPage } from './pages/plaidAdd';
+import { NewItemPage } from './pages/accountAdd';
 import { SignupPage } from './pages/signup';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Route path="/login" element={<LoginPage></LoginPage>} />
         <Route path="/signup" element={<SignupPage></SignupPage>} />
         <Route path='/home' element={<HomePage></HomePage>}/>
-        <Route path='/addSource' element={<NewPlaidItemPage></NewPlaidItemPage>}/>
+        <Route path='/addSource' element={<NewItemPage></NewItemPage>}/>
       </Routes>
     </div>
   );

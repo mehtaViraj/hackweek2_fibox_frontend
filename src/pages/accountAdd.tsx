@@ -8,7 +8,7 @@ import {
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000";
 
-export function NewPlaidItemPage(): ReactElement {
+export function NewItemPage(): ReactElement {
   const TOKEN = parseInt(sessionStorage.getItem("token")!);
   const USERNAME = sessionStorage.getItem("username")!;
   const linkToken = sessionStorage.getItem("linkToken")!;
@@ -43,6 +43,8 @@ export function NewPlaidItemPage(): ReactElement {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { open, exit, ready } = usePlaidLink(config);
+
+  
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-t from-zinc-800 to-neutral-900">

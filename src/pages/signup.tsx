@@ -38,7 +38,7 @@ export function SignupPage(props: {}): ReactElement {
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-t from-zinc-800 to-neutral-900">
       <div className="relative bg w-max h-max rounded-lg p-1 m-0">
-        <h1 className="text-3xl font-bold pb-3 text-slate-100">We'd to have you</h1>
+        <h1 className="text-3xl font-bold pb-3 text-slate-100">We'd love to have you</h1>
         <h1 className="text-lg text-gray-400 pb-10">Setup in seconds!</h1>
         <form onSubmit={onSubmitHandler}>
           <div className="pr-5 py-2 border-b border-gray-400">
