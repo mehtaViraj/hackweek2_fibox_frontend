@@ -64,6 +64,7 @@ export function HomePage(props: {}): ReactElement {
 
   let [dataLoaded, setdataLoaded] = useState(false);
   let [accountData, setAccountData]: [Array<any>, any] = useState([]);
+  let [crytoBalance, setcrytoBalance] = useState(0);
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
@@ -75,17 +76,17 @@ export function HomePage(props: {}): ReactElement {
       const walletAddress = sessionStorage.getItem('crpytoAccount');
       if (walletAddress) {
         const balance = await provider.getBalance(walletAddress);
-        const balanceInEth = ethers.utils.formatEther(balance)
+        setcrytoBalance(parseFloat(ethers.utils.formatEther(balance)))
         accountArray.push({
           name: walletAddress,
           subtype: 'crypto wallet',
           balances: {
-            current: balanceInEth,
+            current: crytoBalance,
             iso_currency_code: 'ETH'
           }
         })
       }
-      
+
       setAccountData(accountArray);
       setdataLoaded(true);
     }
@@ -169,7 +170,7 @@ export function HomePage(props: {}): ReactElement {
             </div>
 						<div className="flex flex-col h-full w-[70%] items-start justify-center p-4 bg-transparent">
 							<p className="inline text-sm text-gray-400 pb-0">Crpto Balance</p>
-							<p className="text-xl font-semibold text-slate-100">{totalStandardBalance()}</p>
+							<p className="text-xl font-semibold text-slate-100">{crytoBalance}</p>
 						</div>
 						<button className="absolute right-4 text-white justify-self-end self-center font-semibold text-center bg-transparent border-2 border-gray-500 hover:bg-gray-600 rounded-lg h-12 w-12">
               <p className="text-2xl font-semibold mt-0 pb-[4px]">{'→'}</p>
