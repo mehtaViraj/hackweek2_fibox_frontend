@@ -127,6 +127,9 @@ export function NewItemPage(): ReactElement {
       <button onClick={connectWallet} className="block mt-8 w-max h-max font-semibold text-white rounded-lg bg-orange-500 hover:bg-orange-800 text-2xl p-5" type='button' disabled={!ready}>
         Connect a Crypto Wallet
       </button>
+      <button onClick={() => navigate('/home')} className="block mt-12 w-max h-max text-white rounded-lg bg-red-500 hover:bg-red-900 text-lg px-5 py-3" type='button' disabled={!ready}>
+        <p className="pb-1">Cancel</p>
+      </button>
     </div>
   );
 }

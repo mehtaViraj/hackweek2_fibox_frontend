@@ -11,7 +11,7 @@ export function HomePage(props: {}): ReactElement {
   const USERNAME = sessionStorage.getItem("username")!;
 
   const useAccountLink = async () => {
-    console.log(TOKEN);
+    // console.log(TOKEN);
     const res = await fetch(`${BACKEND_URL}/newLinkToken?username=${USERNAME}`);
     const response = await res.json();
     if (!(res.status === 200 && response.result === "success")) {
@@ -24,11 +24,15 @@ export function HomePage(props: {}): ReactElement {
     }
   };
 
+  const goToTransactions = async (account: any) => {
+    navigate(`/transactions?item=${account.item_id}&account=${account.account_id}`)
+  };
+
   function AccountTile(props: { account: any }): ReactElement {
     const account = props.account;
     return (
       <div className="block w-full bg-transparent px-8 py-3">
-        <div className="flex flex-row justify-between w-full bg-gradient-to-r p-0 from-sky-200 to-sky-600 rounded-lg">
+        <button onClick={() => goToTransactions(account)} className="flex flex-row justify-between w-full bg-gradient-to-r p-0 from-sky-200 to-sky-600 hover:from-emerald-200 hover:to-emerald-600 rounded-lg">
           <div className="relative h-full min-h-[100px] w-[60%] bg-sky-300 rounded-lg">
             <p className="absolute max-w-[85%] truncate top-3 left-3 text-black font-semibold">
               {account.name}
@@ -45,7 +49,7 @@ export function HomePage(props: {}): ReactElement {
               {account.balances.current}
             </p>
           </div>
-        </div>
+        </button>
       </div>
     );
   }

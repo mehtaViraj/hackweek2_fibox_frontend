@@ -5,6 +5,7 @@ import { HomePage } from './pages/home';
 import { LoginPage } from './pages/login';
 import { NewItemPage } from './pages/accountAdd';
 import { SignupPage } from './pages/signup';
+import { TransactionDisplay } from './pages/transactionPage';
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<SignupPage></SignupPage>} />
         <Route path='/home' element={<HomePage></HomePage>}/>
         <Route path='/addSource' element={<NewItemPage></NewItemPage>}/>
+        <Route path='/transactions' element={<TransactionDisplay></TransactionDisplay>}/>
       </Routes>
     </div>
   );
