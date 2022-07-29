@@ -5,7 +5,6 @@ import { HomePage } from './pages/home';
 import { LoginPage } from './pages/login';
 import { NewItemPage } from './pages/accountAdd';
 import { SignupPage } from './pages/signup';
-
 function App() {
   return (
     <div className="App">

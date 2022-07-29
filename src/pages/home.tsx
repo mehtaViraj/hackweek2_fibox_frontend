@@ -1,7 +1,10 @@
+import { ethers } from "ethers";
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000";
+
+const provider = ethers.getDefaultProvider();
 
 export function HomePage(props: {}): ReactElement {
   const TOKEN = parseInt(sessionStorage.getItem("token")!);
@@ -16,7 +19,7 @@ export function HomePage(props: {}): ReactElement {
     } else {
       // console.log(response.data.link_token);
       sessionStorage.setItem("linkToken", response.data.link_token);
-      console.log(sessionStorage.getItem("linkToken"));
+      // console.log(sessionStorage.getItem("linkToken"));
       navigate("/addSource");
     }
   };
@@ -27,7 +30,7 @@ export function HomePage(props: {}): ReactElement {
       <div className="block w-full bg-transparent px-8 py-3">
         <div className="flex flex-row justify-between w-full bg-gradient-to-r p-0 from-sky-200 to-sky-600 rounded-lg">
           <div className="relative h-full min-h-[100px] w-[60%] bg-sky-300 rounded-lg">
-            <p className="absolute top-3 left-3 text-black font-semibold">
+            <p className="absolute max-w-[85%] truncate top-3 left-3 text-black font-semibold">
               {account.name}
             </p>
             <p className="absolute bottom-3 left-3 text-black font-semibold">
@@ -60,14 +63,30 @@ export function HomePage(props: {}): ReactElement {
   }
 
   let [dataLoaded, setdataLoaded] = useState(false);
-  let [accountData, setAccountData] = useState([]);
+  let [accountData, setAccountData]: [Array<any>, any] = useState([]);
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(
         `${BACKEND_URL}/getAllAccountData?username=${USERNAME}&token=${TOKEN}`
       );
       const resdata = await res.json();
-      setAccountData(resdata.data);
+      let accountArray = (resdata.data as Array<any>)
+
+      const walletAddress = sessionStorage.getItem('crpytoAccount');
+      if (walletAddress) {
+        const balance = await provider.getBalance(walletAddress);
+        const balanceInEth = ethers.utils.formatEther(balance)
+        accountArray.push({
+          name: walletAddress,
+          subtype: 'crypto wallet',
+          balances: {
+            current: balanceInEth,
+            iso_currency_code: 'ETH'
+          }
+        })
+      }
+      
+      setAccountData(accountArray);
       setdataLoaded(true);
     }
     fetchData();
