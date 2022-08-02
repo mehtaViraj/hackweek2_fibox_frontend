@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
+import { ENV_BACKEND_URL } from "../env";
 
-const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000"
+const BACKEND_URL = ENV_BACKEND_URL ?? "http://localhost:4000"
 
 export function LoginPage(props: {}): ReactElement {
 

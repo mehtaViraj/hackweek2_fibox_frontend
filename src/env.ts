@@ -1,0 +1,1 @@
+export const ENV_BACKEND_URL = 'https://18f7-72-138-26-246.ngrok.io';

@@ -1,7 +1,8 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { ENV_BACKEND_URL } from "../env";
 
-const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000";
+const BACKEND_URL = ENV_BACKEND_URL ?? "http://localhost:4000";
 
 export function TransactionDisplay(): ReactElement {
   const TOKEN = parseInt(sessionStorage.getItem("token")!);
